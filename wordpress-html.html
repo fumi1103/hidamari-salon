@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>hidamari hair & relax — おしゃれな隠れ家美容室</title>
-<meta name="description" content="一人ひとりに寄りそう、大人のための小さな隠れ家美容室 hidamari hair & relax。完全予約・1日4名さま限定。" />
-<meta property="og:title" content="hidamari hair & relax" />
-<meta property="og:description" content="今日のわたしに、そっと寄りそう髪時間。完全予約・1日4名さま限定の隠れ家サロン。" />
-<meta property="og:type" content="website" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
 <!-- =====================================================================
-  hidamari hair & relax — 1ページ美容室サイト（WordPress / Cocoon 用）
+  hidamari hair & relax — WordPress(Cocoon) カスタムHTMLブロック用
   ---------------------------------------------------------------------
-  ■ 使い方（Cocoon）
-  1. 固定ページを新規作成 →（推奨）ページ属性 or Cocoon設定で
-     「1カラム（全幅）」テンプレートを選択。
-  2. 本文に「カスタムHTML」ブロックを追加し、この <div id="hidamari-salon">
-     〜 末尾の <script> までを丸ごと貼り付け。
-  3. 公開。CSSはすべて #hidamari-salon 配下にスコープしてあるので
-     テーマCSSと干渉しません。
+  ■ 使い方
+  1. 固定ページを新規作成 → ページ属性で「1カラム（全幅）」テンプレートを選択
+  2. 本文に「カスタムHTML」ブロックを追加 → このファイルの中身を丸ごと貼り付け
+  3. CSSは wordpress-style.css の中身を「外観 → カスタマイズ → 追加CSS」に貼る
+  4. JSは wordpress-script.js の中身を「Cocoon設定 → 高度な設定 →
+     </body>直前に出力するコード」に貼る
 
-  ■ 差し替えポイント（検索して置換）
+  ■ 画像について（重要・公開前に必須）
+  下の <img src="images/◯◯.jpg"> はローカル用の相対パスです。
+  メディアライブラリに images/ フォルダの10枚をまとめてアップロードし、
+  テキストエディタで一括置換してください。
+
+    images/  →  https://あなたのドメイン/wp-content/uploads/2026/06/
+
+  ※ wordpress-script.js 側にも images/stylist-aoi.jpg などのパスがあるので
+    同じ置換をJS側にも行ってください。
+
+  必要な画像ファイル一覧:
+    hero-main.jpg / hero-sub.jpg / concept.jpg /
+    gallery-1.jpg 〜 gallery-6.jpg / stylist-aoi.jpg / stylist-mio.jpg
+
+  ■ その他の差し替えポイント（検索して置換）
   ・電話番号「090-0000-0000」、住所、営業時間
-  ・LINE予約URL → 下の HS_CONFIG.lineUrl を実URLに
-  ・店内写真 → .hs-ph 要素を <img> に置き換え（コメント参照）
+  ・LINE予約URL → wordpress-script.js 内の HS_CONFIG.lineUrl を実URLに
 ===================================================================== -->
 
 <div id="hidamari-salon">
@@ -94,8 +90,7 @@
           <span>since 2018</span>
         </div>
         <div class="hs-hero-tag hs-hero-tag-2"><span>1日 4名さま限定</span></div>
-        <!-- images/hero-main.jpg を配置すると反映されます -->
-        <img class="hs-hero-photo hs-hero-photo-main hs-img" src="images/hero-main.jpg" alt="店内 / アンティーク椅子と観葉植物" />
+        <img class="hs-hero-photo hs-hero-photo-main hs-img" src="images/hero-main.jpg" alt="店内の様子" />
         <img class="hs-hero-photo hs-hero-photo-sub hs-img hs-round" src="images/hero-sub.jpg" alt="ドライフラワー" />
         <div class="hs-leaf hs-leaf-1"><svg width="56" height="56" viewBox="0 0 40 40"><path d="M8 32C8 18 16 8 32 8C32 24 22 32 8 32Z" fill="var(--hs-pista)" opacity="0.6"/></svg></div>
         <div class="hs-leaf hs-leaf-2"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 32C8 18 16 8 32 8C32 24 22 32 8 32Z" fill="var(--hs-pista-dark)" opacity="0.6"/></svg></div>
@@ -170,7 +165,7 @@
       <figure class="hs-gallery-item hs-span-wide"><img class="hs-img" src="images/gallery-1.jpg" alt="風になびく髪" style="height:100%;border-radius:1.5rem;" /><figcaption>艶めく、美髪</figcaption></figure>
       <figure class="hs-gallery-item hs-span-tall"><img class="hs-img" src="images/gallery-2.jpg" alt="サロン店内" style="height:100%;border-radius:1.5rem;" /><figcaption>オーバル鏡が並ぶスタイリング席</figcaption></figure>
       <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-3.jpg" alt="ピンクのカラーリング" style="height:100%;border-radius:1.5rem;" /><figcaption>発色までこだわるカラーリング</figcaption></figure>
-      <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-4.jpg" alt="ネイル見本を選ぶお客様" style="height:100%;border-radius:1.5rem;" /><figcaption>好みの色を、じっくりご一緒に</figcaption></figure>
+      <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-4.jpg" alt="カラー見本を選ぶお客様" style="height:100%;border-radius:1.5rem;" /><figcaption>好みの色を、じっくりご一緒に</figcaption></figure>
       <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-5.jpg" alt="コテで丁寧に巻く後ろ姿" style="height:100%;border-radius:1.5rem;" /><figcaption>ふんわり仕上げる、丁寧なカール</figcaption></figure>
       <figure class="hs-gallery-item hs-span-wide"><img class="hs-img" src="images/gallery-6.jpg" alt="サロンの道具" style="height:100%;border-radius:1.5rem;" /><figcaption>道具たちのフラットレイ</figcaption></figure>
     </div>
@@ -237,7 +232,3 @@
   </div>
 
 </div><!-- /#hidamari-salon -->
-
-<script src="script.js"></script>
-</body>
-</html>
