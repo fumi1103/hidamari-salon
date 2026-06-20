@@ -137,17 +137,24 @@
 
   function submitReservation(){
     state.submitting=true; state.submitError=false; renderModal();
-    var fd=new FormData();
-    fd.append("_wpcf7", HS_CONFIG.cf7FormId);
-    fd.append("reservation-name", state.name);
-    fd.append("reservation-phone", state.phone);
-    fd.append("reservation-menu", state.menu);
-    fd.append("reservation-stylist", state.stylist);
-    fd.append("reservation-date", state.date+" "+state.time);
-    fd.append("reservation-time", state.time);
-    fd.append("reservation-note", state.note);
+    var refillUrl=HS_CONFIG.reservationEndpoint.replace(/\/feedback$/, "/refill");
 
-    fetch(HS_CONFIG.reservationEndpoint, { method:"POST", body:fd })
+    fetch(refillUrl)
+      .then(function(res){ return res.json(); })
+      .then(function(refill){
+        var fd=new FormData();
+        fd.append("_wpcf7", HS_CONFIG.cf7FormId);
+        if(refill && refill._wpnonce) fd.append("_wpnonce", refill._wpnonce);
+        if(refill && refill._wpcf7_unit_tag) fd.append("_wpcf7_unit_tag", refill._wpcf7_unit_tag);
+        fd.append("reservation-name", state.name);
+        fd.append("reservation-phone", state.phone);
+        fd.append("reservation-menu", state.menu);
+        fd.append("reservation-stylist", state.stylist);
+        fd.append("reservation-date", state.date+" "+state.time);
+        fd.append("reservation-time", state.time);
+        fd.append("reservation-note", state.note);
+        return fetch(HS_CONFIG.reservationEndpoint, { method:"POST", body:fd });
+      })
       .then(function(res){ return res.json(); })
       .then(function(data){
         state.submitting=false;
