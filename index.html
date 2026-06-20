@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>hidamari hair & relax — おしゃれな隠れ家美容室</title>
+<meta name="description" content="一人ひとりに寄りそう、大人のための小さな隠れ家美容室 hidamari hair & relax。完全予約・1日4名さま限定。" />
+<meta property="og:title" content="hidamari hair & relax" />
+<meta property="og:description" content="今日のわたしに、そっと寄りそう髪時間。完全予約・1日4名さま限定の隠れ家サロン。" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- =====================================================================
+  hidamari hair & relax — 1ページ美容室サイト（WordPress / Cocoon 用）
+  ---------------------------------------------------------------------
+  ■ 使い方（Cocoon）
+  1. 固定ページを新規作成 →（推奨）ページ属性 or Cocoon設定で
+     「1カラム（全幅）」テンプレートを選択。
+  2. 本文に「カスタムHTML」ブロックを追加し、この <div id="hidamari-salon">
+     〜 末尾の <script> までを丸ごと貼り付け。
+  3. 公開。CSSはすべて #hidamari-salon 配下にスコープしてあるので
+     テーマCSSと干渉しません。
+
+  ■ 差し替えポイント（検索して置換）
+  ・電話番号「090-0000-0000」、住所、営業時間
+  ・LINE予約URL → 下の HS_CONFIG.lineUrl を実URLに
+  ・店内写真 → .hs-ph 要素を <img> に置き換え（コメント参照）
+===================================================================== -->
+
+<div id="hidamari-salon">
+
+  <!-- ============ HEADER ============ -->
+  <header class="hs-header" id="hs-header">
+    <div class="hs-header-inner">
+      <a class="hs-brand" href="#hs-top" data-nav="hs-top">
+        <span class="hs-brand-mark">
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="8" cy="22" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="22" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M11 19 L26 6M21 19 L6 6M14 16 L18 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="hs-brand-text">
+          <span class="hs-brand-name">hidamari</span>
+          <span class="hs-brand-sub">hair &amp; relax</span>
+        </span>
+      </a>
+      <nav class="hs-nav" id="hs-nav">
+        <a href="#hs-concept" data-nav="hs-concept">コンセプト</a>
+        <a href="#hs-menu" data-nav="hs-menu">メニュー</a>
+        <a href="#hs-stylist" data-nav="hs-stylist">スタイリスト</a>
+        <a href="#hs-gallery" data-nav="hs-gallery">店内</a>
+        <a href="#hs-access" data-nav="hs-access">アクセス</a>
+      </nav>
+      <button class="hs-btn-line hs-header-line" data-reserve>
+        <span class="hs-line-dot"></span>LINEで予約
+      </button>
+      <button class="hs-burger" id="hs-burger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hs-hero" id="hs-top">
+    <div class="hs-hero-grid">
+      <div class="hs-hero-copy">
+        <div class="hs-eyebrow">
+          <svg width="60" height="20" viewBox="0 0 200 20" fill="none"><path d="M2 10 Q15 2,28 10 T54 10 T80 10 T106 10 T132 10 T158 10 T184 10 T198 10" stroke="var(--hs-terra)" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7"/></svg>
+          <span>大人のための小さな美容室</span>
+        </div>
+        <h1 class="hs-hero-title">
+          <span>今日のわたしに、</span>
+          <span>そっと寄りそう髪時間。</span>
+        </h1>
+        <p class="hs-hero-lead">
+          一日に迎えるお客様は、わずか数名。<br/>
+          ひとりの美容師が、最初から最後まで、<br/>
+          あなたの「好き」をじっくり聴かせてください。
+        </p>
+        <div class="hs-hero-cta">
+          <button class="hs-btn-primary" data-reserve>ご予約はこちら<span class="hs-arrow">→</span></button>
+          <a class="hs-btn-ghost" data-reserve><span class="hs-line-dot"></span>LINEで気軽に相談</a>
+        </div>
+        <div class="hs-hero-meta">
+          <div><span class="hs-meta-k">OPEN</span><span class="hs-meta-v">10:00 – 19:00</span></div>
+          <div class="hs-meta-sep"></div>
+          <div><span class="hs-meta-k">CLOSED</span><span class="hs-meta-v">毎週火曜・第3水曜</span></div>
+          <div class="hs-meta-sep"></div>
+          <div><span class="hs-meta-k">SEATS</span><span class="hs-meta-v">完全予約・3席</span></div>
+        </div>
+      </div>
+      <div class="hs-hero-visual">
+        <div class="hs-hero-tag hs-hero-tag-1">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C12 8 14 10 22 12C14 14 12 16 12 22C12 16 10 14 2 12C10 10 12 8 12 2Z" fill="var(--hs-terra)"/></svg>
+          <span>since 2018</span>
+        </div>
+        <div class="hs-hero-tag hs-hero-tag-2"><span>1日 4名さま限定</span></div>
+        <!-- images/hero-main.jpg を配置すると反映されます -->
+        <img class="hs-hero-photo hs-hero-photo-main hs-img" src="images/hero-main.jpg" alt="店内 / アンティーク椅子と観葉植物" />
+        <img class="hs-hero-photo hs-hero-photo-sub hs-img hs-round" src="images/hero-sub.jpg" alt="ドライフラワー" />
+        <div class="hs-leaf hs-leaf-1"><svg width="56" height="56" viewBox="0 0 40 40"><path d="M8 32C8 18 16 8 32 8C32 24 22 32 8 32Z" fill="var(--hs-pista)" opacity="0.6"/></svg></div>
+        <div class="hs-leaf hs-leaf-2"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M8 32C8 18 16 8 32 8C32 24 22 32 8 32Z" fill="var(--hs-pista-dark)" opacity="0.6"/></svg></div>
+      </div>
+    </div>
+    <div class="hs-scroll-hint"><span>scroll</span><span class="hs-scroll-line"></span></div>
+  </section>
+
+  <!-- ============ CONCEPT ============ -->
+  <section class="hs-section hs-tint" id="hs-concept">
+    <div class="hs-head">
+      <div class="hs-kicker"><span class="hs-wave"></span>concept</div>
+      <h2>「いつもの場所」<br/>と呼べる、小さな隠れ家。</h2>
+    </div>
+    <div class="hs-concept-grid">
+      <div class="hs-concept-image">
+        <img class="hs-img" src="images/concept.jpg" alt="窓辺のアンティーク小物" style="aspect-ratio:4/5;border-radius:2rem;" />
+        <div class="hs-concept-image-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C12 8 14 10 22 12C14 14 12 16 12 22C12 16 10 14 2 12C10 10 12 8 12 2Z" fill="var(--hs-terra)"/></svg>
+          一席ずつ、ゆったり
+        </div>
+      </div>
+      <div class="hs-concept-text">
+        <p class="hs-concept-lead">流れ作業のような時間ではなく、<br/>あなたのためだけの、ゆったりとした時間を。</p>
+        <p>住宅街の小さなアパルトマンの一室、<br/>扉を開けた瞬間に届く、ドライフラワーと珈琲のかおり。<br/>ここは、ヘアサロンというより「もうひとつの自分の部屋」。</p>
+        <p>「最近、髪に元気がなくて」「白髪が気になりはじめて」<br/>そんな小さな迷いも、ぜひそのまま教えてください。<br/>一人ひとりの髪質・くせ・お悩みに合わせて、<br/>“わたしらしく心地よい”を一緒に見つけていきます。</p>
+        <div class="hs-points">
+          <div class="hs-point"><div class="hs-point-num">01</div><div><div class="hs-point-t">ひとりの担当者が最初から最後まで</div><div class="hs-point-d">シャンプー・カラー・カットすべてを同じ美容師が担当します。</div></div></div>
+          <div class="hs-point"><div class="hs-point-num">02</div><div><div class="hs-point-t">じっくり聴くカウンセリング</div><div class="hs-point-d">最初の20分はおしゃべりから。ライフスタイルまで一緒に考えます。</div></div></div>
+          <div class="hs-point"><div class="hs-point-num">03</div><div><div class="hs-point-t">完全予約・1日4名さま限定</div><div class="hs-point-d">他のお客様と顔を合わせない、貸し切りに近い空間です。</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <section class="hs-section" id="hs-menu">
+    <div class="hs-head">
+      <div class="hs-kicker"><span class="hs-wave"></span>menu</div>
+      <h2>髪と心が、ほどけていく時間。</h2>
+      <p class="hs-lead">価格はすべて税込です。組み合わせ次第でセット割引もご用意しています。<br/>お悩みに合わせたご提案もしますので、お気軽にご相談ください。</p>
+    </div>
+    <div class="hs-menu-tabs" id="hs-menu-tabs"></div>
+    <div class="hs-menu-list" id="hs-menu-list"></div>
+    <div class="hs-menu-banner">
+      <div>
+        <div class="hs-banner-eyebrow">first visit</div>
+        <div class="hs-banner-title">はじめての方へ・お試しセット <span class="hs-banner-price">¥9,900</span></div>
+        <div class="hs-banner-desc">カット + 艶カラー + ヘッドスパ（通常 ¥13,200 → ¥9,900）</div>
+      </div>
+      <button class="hs-btn-primary" data-reserve data-menu="はじめての方セット">このメニューで予約<span class="hs-arrow">→</span></button>
+    </div>
+  </section>
+
+  <!-- ============ STYLIST ============ -->
+  <section class="hs-section hs-tint" id="hs-stylist">
+    <div class="hs-head">
+      <div class="hs-kicker"><span class="hs-wave"></span>stylist</div>
+      <h2>あなたの“好き”を、<br/>いっしょに見つける人。</h2>
+    </div>
+    <div class="hs-stylist-grid" id="hs-stylist-grid"></div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="hs-section" id="hs-gallery">
+    <div class="hs-head">
+      <div class="hs-kicker"><span class="hs-wave"></span>gallery</div>
+      <h2>小さな扉のむこうに。</h2>
+      <p class="hs-lead">古い洋館の一室を改装した、ちいさなサロン。</p>
+    </div>
+    <div class="hs-gallery-grid">
+      <!-- TEMP: 配置確認用バッジ（hs-debug-tag）。画像が決まったら削除してOK -->
+      <figure class="hs-gallery-item hs-span-wide"><img class="hs-img" src="images/gallery-1.jpg" alt="風になびく髪" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-1（wide）&#10;1600×550</span><figcaption>艶めく、美髪</figcaption></figure>
+      <figure class="hs-gallery-item hs-span-tall"><img class="hs-img" src="images/gallery-2.jpg" alt="サロン店内" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-2（tall）&#10;900×1200</span><figcaption>オーバル鏡が並ぶスタイリング席</figcaption></figure>
+      <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-3.jpg" alt="ピンクのカラーリング" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-3（normal）&#10;1200×750</span><figcaption>	発色までこだわるカラーリング</figcaption></figure>
+      <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-4.jpg" alt="ネイル見本を選ぶお客様" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-4（normal）&#10;1200×750</span><figcaption>好みの色を、じっくりご一緒に</figcaption></figure>
+      <figure class="hs-gallery-item"><img class="hs-img" src="images/gallery-5.jpg" alt="コテで丁寧に巻く後ろ姿" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-5（normal）&#10;1200×750</span><figcaption>ふんわり仕上げる、丁寧なカール</figcaption></figure>
+      <figure class="hs-gallery-item hs-span-wide"><img class="hs-img" src="images/gallery-6.jpg" alt="サロンの道具" style="height:100%;border-radius:1.5rem;" /><span class="hs-debug-tag">gallery-6（wide）&#10;1600×550</span><figcaption>道具たちのフラットレイ</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ ACCESS ============ -->
+  <section class="hs-section hs-tint" id="hs-access">
+    <div class="hs-head">
+      <div class="hs-kicker"><span class="hs-wave"></span>access</div>
+      <h2>こぢんまりとした、白い扉が目印。</h2>
+    </div>
+    <div class="hs-access-grid">
+      <div class="hs-access-map">
+        <!-- 差し替え: 下の枠を Googleマップ埋め込み <iframe> に置き換え可 -->
+        <div class="hs-map-frame">
+          <div class="hs-map-grid"></div>
+          <div class="hs-map-road hs-map-road-h"></div>
+          <div class="hs-map-road hs-map-road-v"></div>
+          <div class="hs-map-pin"><div class="hs-pin-dot"></div><div class="hs-pin-label">hidamari</div></div>
+          <div class="hs-map-park"><svg width="28" height="28" viewBox="0 0 40 40"><path d="M8 32C8 18 16 8 32 8C32 24 22 32 8 32Z" fill="var(--hs-pista)" opacity="0.6"/></svg><span>○○公園</span></div>
+          <div class="hs-map-station"><span class="hs-station-dot"></span><span>○○駅</span></div>
+        </div>
+        <div class="hs-map-note">※ 駅から徒歩7分・専用駐車場2台あり</div>
+      </div>
+      <dl class="hs-access-info">
+        <div><dt>住所</dt><dd>〒000-0000<br/>○○県○○市○○町 1-2-3<br/>メゾン・ソレイユ 201号室</dd></div>
+        <div><dt>電話</dt><dd>090-0000-0000</dd></div>
+        <div><dt>営業時間</dt><dd>10:00 – 19:00<br/>（最終受付：カット 18:00 / カラー 16:30）</dd></div>
+        <div><dt>定休日</dt><dd>毎週火曜・第3水曜</dd></div>
+        <div><dt>お支払い</dt><dd>現金・各種クレジット・PayPay</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="hs-footer">
+    <div class="hs-footer-grid">
+      <div>
+        <div class="hs-brand hs-brand-large">
+          <span class="hs-brand-mark"><svg width="26" height="26" viewBox="0 0 32 32" fill="none"><circle cx="8" cy="22" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="22" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M11 19 L26 6M21 19 L6 6M14 16 L18 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          <span class="hs-brand-text"><span class="hs-brand-name">hidamari</span><span class="hs-brand-sub">hair &amp; relax</span></span>
+        </div>
+        <p class="hs-footer-tag">あなたの「いつもの場所」になれますように。</p>
+      </div>
+      <div class="hs-footer-links">
+        <div><div class="hs-footer-h">menu</div><a href="#hs-concept" data-nav="hs-concept">コンセプト</a><a href="#hs-menu" data-nav="hs-menu">メニュー</a><a href="#hs-stylist" data-nav="hs-stylist">スタイリスト</a><a href="#hs-access" data-nav="hs-access">アクセス</a></div>
+        <div><div class="hs-footer-h">follow</div><a href="#" target="_blank" rel="noopener">Instagram</a><a href="#" target="_blank" rel="noopener">LINE 公式</a></div>
+      </div>
+    </div>
+    <div class="hs-footer-bottom"><div>© hidamari hair &amp; relax</div><div>designed with care 🌿</div></div>
+  </footer>
+
+  <!-- ============ FLOATING LINE CTA ============ -->
+  <div class="hs-floating-cta">
+    <button class="hs-btn-line" data-reserve><span class="hs-line-dot"></span>LINEで予約・ご相談</button>
+  </div>
+
+  <!-- ============ RESERVE MODAL ============ -->
+  <div class="hs-modal-overlay" id="hs-modal" hidden>
+    <div class="hs-modal" role="dialog" aria-modal="true">
+      <button class="hs-modal-close" id="hs-modal-close" aria-label="閉じる">×</button>
+      <div id="hs-modal-body"></div>
+    </div>
+  </div>
+
+</div><!-- /#hidamari-salon -->
+
+<script src="script.js"></script>
+</body>
+</html>
