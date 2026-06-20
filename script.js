@@ -4,7 +4,10 @@
   var HS_CONFIG = {
     // LINE公式アカウントのURL。設定すると予約ボタン/モーダル内ボタンがここに飛びます。
     // 空のままならデモのモーダルフォームが開きます。
-    lineUrl: ""
+    lineUrl: "",
+    // WordPress(Contact Form 7)の送信先。フォームID 505 の REST フィードバックURL。
+    reservationEndpoint: "https://wordpress.unwired.jp/wp-json/contact-form-7/v1/contact-forms/505/feedback",
+    cf7FormId: "505"
   };
 
   var root = document.getElementById("hidamari-salon");
@@ -122,15 +125,37 @@
   modal.addEventListener("click", function(e){ if(e.target===modal) closeReserve(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !modal.hidden) closeReserve(); });
 
-  var state={step:0,menu:"",stylist:"指名なし（おまかせ）",date:"",time:"",name:"",phone:"",note:"",submitted:false};
+  var state={step:0,menu:"",stylist:"指名なし（おまかせ）",date:"",time:"",name:"",phone:"",note:"",submitted:false,submitting:false,submitError:false};
 
   function openReserve(menu, stylist){
     // LINE URLが設定されていれば外部へ
     if(HS_CONFIG.lineUrl){ window.open(HS_CONFIG.lineUrl,"_blank","noopener"); return; }
-    state={step:0,menu:menu||"",stylist:stylist||"指名なし（おまかせ）",date:"",time:"",name:"",phone:"",note:"",submitted:false};
+    state={step:0,menu:menu||"",stylist:stylist||"指名なし（おまかせ）",date:"",time:"",name:"",phone:"",note:"",submitted:false,submitting:false,submitError:false};
     modal.hidden=false; document.body.style.overflow="hidden"; renderModal();
   }
   function closeReserve(){ modal.hidden=true; document.body.style.overflow=""; }
+
+  function submitReservation(){
+    state.submitting=true; state.submitError=false; renderModal();
+    var fd=new FormData();
+    fd.append("_wpcf7", HS_CONFIG.cf7FormId);
+    fd.append("reservation-name", state.name);
+    fd.append("reservation-phone", state.phone);
+    fd.append("reservation-menu", state.menu);
+    fd.append("reservation-stylist", state.stylist);
+    fd.append("reservation-date", state.date+" "+state.time);
+    fd.append("reservation-time", state.time);
+    fd.append("reservation-note", state.note);
+
+    fetch(HS_CONFIG.reservationEndpoint, { method:"POST", body:fd })
+      .then(function(res){ return res.json(); })
+      .then(function(data){
+        state.submitting=false;
+        if(data && data.status==="mail_sent"){ state.submitted=true; } else { state.submitError=true; }
+        renderModal();
+      })
+      .catch(function(){ state.submitting=false; state.submitError=true; renderModal(); });
+  }
 
   // 予約トリガ（ヘッダー/ヒーロー/フローティング/バナー）
   root.querySelectorAll("[data-reserve]").forEach(function(b){
@@ -147,6 +172,7 @@
 
   function renderModal(){
     if(state.submitted){ renderDone(); return; }
+    if(state.submitError){ renderError(); return; }
     var canNext=[state.menu, true, (state.date&&state.time), (state.name&&state.phone), true][state.step];
     var html='';
     html+='<div class="hs-modal-head"><div class="hs-modal-eyebrow"><span style="font-family:inherit">✎</span><span>reservation</span></div><h3>ご予約フォーム</h3></div>';
@@ -193,7 +219,7 @@
     html+='</div>';
     html+='<div class="hs-modal-foot"><button class="hs-btn-back"'+(state.step===0?' disabled':'')+'>← 戻る</button>';
     if(state.step<4){ html+='<button class="hs-btn-primary"'+(canNext?'':' disabled')+'>次へ <span class="hs-arrow">→</span></button>'; }
-    else{ html+='<button class="hs-btn-primary">予約を確定する <span class="hs-arrow">→</span></button>'; }
+    else{ html+='<button class="hs-btn-primary"'+(state.submitting?' disabled':'')+'>'+(state.submitting?'送信中…':'予約を確定する <span class="hs-arrow">→</span>')+'</button>'; }
     html+='</div>';
 
     modalBody.innerHTML=html;
@@ -211,7 +237,19 @@
     if(noteI) noteI.addEventListener("input", function(){ state.note=noteI.value; });
     var back=modalBody.querySelector(".hs-btn-back"); if(back) back.addEventListener("click", function(){ if(state.step>0){ state.step--; renderModal(); } });
     var next=modalBody.querySelector(".hs-modal-foot .hs-btn-primary");
-    if(next) next.addEventListener("click", function(){ if(next.disabled) return; if(state.step<4){ state.step++; renderModal(); } else { state.submitted=true; renderModal(); } });
+    if(next) next.addEventListener("click", function(){ if(next.disabled) return; if(state.step<4){ state.step++; renderModal(); } else { submitReservation(); } });
+  }
+
+  function renderError(){
+    modalBody.innerHTML=
+      '<div class="hs-done">'+
+        '<h3>送信に失敗しました。</h3>'+
+        '<p>恐れ入りますが、しばらくしてから再度お試しいただくか、<br>LINEまたはお電話にてご連絡ください。</p>'+
+        '<button class="hs-btn-primary" id="hs-err-retry">もう一度送信する</button>'+
+        '<div><a class="hs-line-quick" id="hs-err-close">閉じる</a></div>'+
+      '</div>';
+    modalBody.querySelector("#hs-err-retry").addEventListener("click", function(){ submitReservation(); });
+    modalBody.querySelector("#hs-err-close").addEventListener("click", closeReserve);
   }
 
   function renderDone(){
