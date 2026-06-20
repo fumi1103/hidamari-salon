@@ -5,9 +5,8 @@
     // LINE公式アカウントのURL。設定すると予約ボタン/モーダル内ボタンがここに飛びます。
     // 空のままならデモのモーダルフォームが開きます。
     lineUrl: "",
-    // WordPress(Contact Form 7)の送信先。フォームID 38 の REST フィードバックURL。
-    reservationEndpoint: "https://wordpress.unwired.jp/wp-json/contact-form-7/v1/contact-forms/38/feedback",
-    cf7FormId: "38"
+    // WordPress(functions.phpに追加した独自RESTエンドポイント)の送信先。
+    reservationEndpoint: "https://wordpress.unwired.jp/wp-json/hidamari/v1/reservation"
   };
 
   var root = document.getElementById("hidamari-salon");
@@ -137,24 +136,20 @@
 
   function submitReservation(){
     state.submitting=true; state.submitError=false; renderModal();
-    var refillUrl=HS_CONFIG.reservationEndpoint.replace(/\/feedback$/, "/refill");
 
-    fetch(refillUrl)
-      .then(function(res){ return res.json(); })
-      .then(function(refill){
-        var fd=new FormData();
-        fd.append("_wpcf7", HS_CONFIG.cf7FormId);
-        if(refill && refill._wpnonce) fd.append("_wpnonce", refill._wpnonce);
-        if(refill && refill._wpcf7_unit_tag) fd.append("_wpcf7_unit_tag", refill._wpcf7_unit_tag);
-        fd.append("reservation-name", state.name);
-        fd.append("reservation-phone", state.phone);
-        fd.append("reservation-menu", state.menu);
-        fd.append("reservation-stylist", state.stylist);
-        fd.append("reservation-date", state.date+" "+state.time);
-        fd.append("reservation-time", state.time);
-        fd.append("reservation-note", state.note);
-        return fetch(HS_CONFIG.reservationEndpoint, { method:"POST", body:fd });
+    fetch(HS_CONFIG.reservationEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "reservation-name": state.name,
+        "reservation-phone": state.phone,
+        "reservation-menu": state.menu,
+        "reservation-stylist": state.stylist,
+        "reservation-date": state.date+" "+state.time,
+        "reservation-time": state.time,
+        "reservation-note": state.note
       })
+    })
       .then(function(res){ return res.json(); })
       .then(function(data){
         state.submitting=false;
