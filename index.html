@@ -61,9 +61,11 @@
         <a href="#hs-gallery" data-nav="hs-gallery">店内</a>
         <a href="#hs-access" data-nav="hs-access">アクセス</a>
       </nav>
-      <button class="hs-btn-line hs-header-line" data-reserve>
+      <!--ヘッダーのLINEで予約ボタン　とりあえず非表示にしておく-->
+       <!-- <button class="hs-btn-line hs-header-line" data-reserve>
         <span class="hs-line-dot"></span>LINEで予約
-      </button>
+      </button> -->
+
       <button class="hs-burger" id="hs-burger" aria-label="メニュー"><span></span><span></span><span></span></button>
     </div>
   </header>
@@ -85,9 +87,12 @@
           ひとりの美容師が、最初から最後まで、<br/>
           あなたの「好き」をじっくり聴かせてください。
         </p>
+        <!-- ご予約はこちらボタンは予約モーダル　 LINEで気軽に相談の飛び先をLINEに -->
         <div class="hs-hero-cta">
           <button class="hs-btn-primary" data-reserve>ご予約はこちら<span class="hs-arrow">→</span></button>
-          <a class="hs-btn-ghost" data-reserve><span class="hs-line-dot"></span>LINEで気軽に相談</a>
+          <a class="hs-btn-ghost" href="https://line.me/R/ti/p/@622fogqi" target="_blank" rel="noopener">
+            <span class="hs-line-dot"></span>LINEで気軽に相談
+          </a>
         </div>
         <div class="hs-hero-meta">
           <div><span class="hs-meta-k">OPEN</span><span class="hs-meta-v">10:00 – 19:00</span></div>
@@ -233,9 +238,11 @@
   </footer>
 
   <!-- ============ FLOATING LINE CTA ============ -->
-  <div class="hs-floating-cta">
-    <button class="hs-btn-line" data-reserve><span class="hs-line-dot"></span>LINEで予約・ご相談</button>
-  </div>
+ <div class="hs-floating-cta">
+    <a class="hs-btn-line" href="https://line.me/R/ti/p/@622fogqi" target="_blank" rel="noopener">
+        <span class="hs-line-dot"></span>LINEで気軽に相談
+    </a>
+</div>
 
   <!-- ============ RESERVE MODAL ============ -->
   <div class="hs-modal-overlay" id="hs-modal" hidden>
